@@ -49,5 +49,5 @@ tasks.register('verifyGameTests') {
     }
 }
 
-// Include the public source license and resource notices in built artifacts.
+// Include the code license and resource notices in public artifacts.
 tasks.named('jar') { from('LICENSE'); from('NOTICE.md') }

@@ -17,3 +17,6 @@ modId="minecraft"
 type="required"
 versionRange="[1.21.1]"
 side="BOTH"
+
+[[mixins]]
+config="noopsnet-core.mixins.json"

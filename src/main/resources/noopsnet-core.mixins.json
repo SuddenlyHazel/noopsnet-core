@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.noopsnet.core.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["DigitalCameraMixin"],
+  "injectors": {"defaultRequire": 1}
+}

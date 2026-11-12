@@ -1,14 +1,14 @@
 {
-  "source_revision": "d6463f88e9578e94e8b4be256640902c8fca4776",
+  "source_revision": "3d4cc75ecd663396592ec41eafaa030be198daf1",
   "snapshot_date": "2026-11-12",
   "project": "NoopsNet Core",
   "artifacts": [
     {
-      "filename": "noopsnet-core-0.1.1.jar",
-      "version": "0.1.1",
+      "filename": "noopsnet-core-0.1.2.jar",
+      "version": "0.1.2",
       "hashes": {
-        "sha1": "cf400109cd90910ba3f4e421b310ff7107664567",
-        "sha512": "76f792594ecd2ad1ed89b640ca653865a03d0cfc3e8b72b9af655faa0c40a4efa948e719662a23073098d41bdddd6e24f327a6f85f27d4f115d16f747d5484af"
+        "sha1": "01ea2bb42aceb038ea7d10ef08c5d0af4cdf41a9",
+        "sha512": "2c2f372a736689344b2eb9a1619e1125364b0f27b4cbf854467ba1ef97bf5544de4be52262875d9e421e6c7bd59c60f2d24b244514409800712fa5ed1acd84ab"
       }
     }
   ]
