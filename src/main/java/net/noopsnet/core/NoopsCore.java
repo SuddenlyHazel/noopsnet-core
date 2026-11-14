@@ -28,6 +28,7 @@ public final class NoopsCore {
 
     public NoopsCore(net.neoforged.bus.api.IEventBus bus) {
         CozyProtection.register(bus);
+        MiningDimension.register();
         NeoForge.EVENT_BUS.addListener(this::starting);
         NeoForge.EVENT_BUS.addListener(this::stopped);
         NeoForge.EVENT_BUS.addListener(this::commands);
@@ -168,7 +169,7 @@ public final class NoopsCore {
         return fail(source, "Spawn is obstructed or unsafe. Please contact staff.");
     }
 
-    private boolean safe(ServerPlayer player, ServerLevel level, Vec3 target) {
+    static boolean safe(ServerPlayer player, ServerLevel level, Vec3 target) {
         BlockPos pos = BlockPos.containing(target);
         if (level.isOutsideBuildHeight(pos)
                 || level.isOutsideBuildHeight(pos.above())

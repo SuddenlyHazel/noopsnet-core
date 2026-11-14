@@ -1,0 +1,58 @@
+{
+  "carvers": {},
+  "downfall": 0.4,
+  "effects": {
+    "fog_color": 12638463,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "sky_color": 7907327,
+    "water_color": 4159204,
+    "water_fog_color": 329011
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "noopsnet_core:mining/ore_coal_lower",
+      "noopsnet_core:mining/ore_iron_middle",
+      "noopsnet_core:mining/ore_iron_small",
+      "noopsnet_core:mining/ore_copper",
+      "noopsnet_core:mining/ore_gold",
+      "noopsnet_core:mining/ore_gold_lower",
+      "noopsnet_core:mining/ore_redstone",
+      "noopsnet_core:mining/ore_redstone_lower",
+      "noopsnet_core:mining/ore_diamond",
+      "noopsnet_core:mining/ore_diamond_medium",
+      "noopsnet_core:mining/ore_diamond_large",
+      "noopsnet_core:mining/ore_diamond_buried",
+      "noopsnet_core:mining/ore_lapis",
+      "noopsnet_core:mining/ore_lapis_buried",
+      "noopsnet_core:mining/ore_emerald"
+    ],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.8
+}

@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "type": "neoforge:add_features",
+  "biomes": "noopsnet_core:mining",
+  "features": [
+    "noopsnet_core:mining/ie_bauxite",
+    "noopsnet_core:mining/ie_lead",
+    "noopsnet_core:mining/ie_silver",
+    "noopsnet_core:mining/ie_nickel",
+    "noopsnet_core:mining/ie_deep_nickel",
+    "noopsnet_core:mining/ie_uranium",
+    "noopsnet_core:mining/ie_mineral_veins"
+  ],
+  "step": "underground_ores"
+}

@@ -6,8 +6,9 @@ version = project.mod_version
 group = 'net.noopsnet'
 base { archivesName = 'noopsnet-core' }
 java { toolchain.languageVersion = JavaLanguageVersion.of(21); withSourcesJar() }
-repositories { mavenCentral() }
+repositories { mavenCentral(); maven { url = 'https://api.modrinth.com/maven' } }
 sourceSets { client; gametest }
+def gameTestDirectory = providers.gradleProperty('withIE').isPresent() ? 'build/gametest-ie' : 'build/gametest'
 [sourceSets.client, sourceSets.gametest].each { set ->
     set.compileClasspath += sourceSets.main.output
     set.runtimeClasspath += sourceSets.main.output
@@ -22,6 +23,7 @@ neoForge {
     runs {
         gameTestServer {
             type = 'gameTestServer'; sourceSet = sourceSets.gametest
+            gameDirectory = file(gameTestDirectory)
             loadedMods = [mods.noopsnet_core]
             systemProperty 'neoforge.enabledGameTestNamespaces', 'noopsnet_core'
         }
@@ -40,14 +42,23 @@ test { useJUnitPlatform() }
 
 tasks.named('jar') { from sourceSets.client.output }
 tasks.named('sourcesJar') { from sourceSets.client.allSource }
-tasks.named('runGameTestServer') { doFirst { delete file('run/logs/latest.log') } }
+// Worldgen fixtures must be fresh: new placed features do not rewrite existing chunks.
+tasks.named('runGameTestServer') { doFirst {
+    delete file(gameTestDirectory + '/logs/latest.log')
+    delete file(gameTestDirectory + '/world')
+} }
 tasks.register('verifyGameTests') {
     dependsOn tasks.named('runGameTestServer')
     doLast {
-        if (!file('run/logs/latest.log').text.contains('All 11 required tests passed'))
+        if (!file(gameTestDirectory + '/logs/latest.log').text.contains('All 14 required tests passed'))
             throw new GradleException('Core GameTests did not pass')
     }
 }
 
 // Include the code license and resource notices in public artifacts.
 tasks.named('jar') { from('LICENSE'); from('NOTICE.md') }
+
+// Optional pack-integration fixture; never bundled into Core.
+if (providers.gradleProperty('withIE').isPresent()) {
+    dependencies { gametestRuntimeOnly('maven.modrinth:immersiveengineering:uNRARSH2') { transitive = false } }
+}

@@ -136,7 +136,8 @@ public final class CozyProtection {
     }
 
     private static void positionCheck(MobSpawnEvent.PositionCheck event) {
-        if (blocksSpawn(event.getLevel().getLevel(), event.getEntity()))
+        if ((MiningDimension.isMining(event.getLevel().getLevel()) && hostile(event.getEntity()))
+                || blocksSpawn(event.getLevel().getLevel(), event.getEntity()))
             event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
     }
 
@@ -146,7 +147,8 @@ public final class CozyProtection {
         if (!event.loadedFromDisk()
                 && event.getLevel() instanceof ServerLevel level
                 && event.getEntity() instanceof Mob mob
-                && blocksSpawn(level, mob)) event.setCanceled(true);
+                && ((MiningDimension.isMining(level) && hostile(mob)) || blocksSpawn(level, mob)))
+            event.setCanceled(true);
     }
 
     static ItemStack equipped(ServerPlayer player) {
@@ -189,6 +191,11 @@ public final class CozyProtection {
 
     private static void entityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof Mob mob && !mob.level().isClientSide && hostile(mob)) {
+            if (MiningDimension.isMining(mob.level())) {
+                mob.discard();
+                event.setCanceled(true);
+                return;
+            }
             if (protectedPlayer(mob.getTarget())) mob.setTarget(null);
             if (mob.getBrain()
                     .checkMemory(MemoryModuleType.ATTACK_TARGET, MemoryStatus.REGISTERED)) {

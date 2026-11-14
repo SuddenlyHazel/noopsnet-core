@@ -1,0 +1,34 @@
+{
+  "type": "noopsnet_core:mining",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "noopsnet_core:mining",
+      "features": true,
+      "lakes": false,
+      "structure_overrides": [],
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        },
+        {
+          "block": "minecraft:deepslate",
+          "height": 63
+        },
+        {
+          "block": "minecraft:stone",
+          "height": 61
+        },
+        {
+          "block": "minecraft:dirt",
+          "height": 3
+        },
+        {
+          "block": "minecraft:grass_block",
+          "height": 1
+        }
+      ]
+    }
+  }
+}
