@@ -6,7 +6,7 @@ modId="noopsnet_core"
 version="${version}"
 displayName="NoopsNet Core"
 authors="NoopsNet"
-description="Shared foundation for NoopsNet client and server features. Persistent homes and spawn travel."
+description="Shared foundation for NoopsNet client and server features. Persistent homes, spawn travel, MonsterStopper blocks and MonsterCharms."
 [[dependencies.noopsnet_core]]
 modId="neoforge"
 type="required"

@@ -26,7 +26,8 @@ public final class NoopsCore {
     private HomeStore homes;
     private final Map<UUID, Long> homeCooldown = new HashMap<>(), spawnCooldown = new HashMap<>();
 
-    public NoopsCore() {
+    public NoopsCore(net.neoforged.bus.api.IEventBus bus) {
+        CozyProtection.register(bus);
         NeoForge.EVENT_BUS.addListener(this::starting);
         NeoForge.EVENT_BUS.addListener(this::stopped);
         NeoForge.EVENT_BUS.addListener(this::commands);

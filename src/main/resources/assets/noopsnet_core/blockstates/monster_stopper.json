@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "noopsnet_core:block/monster_stopper"
+    }
+  }
+}

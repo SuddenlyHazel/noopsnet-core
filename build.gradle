@@ -44,7 +44,7 @@ tasks.named('runGameTestServer') { doFirst { delete file('run/logs/latest.log') 
 tasks.register('verifyGameTests') {
     dependsOn tasks.named('runGameTestServer')
     doLast {
-        if (!file('run/logs/latest.log').text.contains('All 1 required tests passed'))
+        if (!file('run/logs/latest.log').text.contains('All 8 required tests passed'))
             throw new GradleException('Core GameTests did not pass')
     }
 }
