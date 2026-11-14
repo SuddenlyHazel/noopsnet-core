@@ -11,6 +11,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -25,6 +27,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
@@ -87,6 +90,7 @@ public final class CozyProtection {
         NeoForge.EVENT_BUS.addListener(CozyProtection::target);
         NeoForge.EVENT_BUS.addListener(CozyProtection::damage);
         NeoForge.EVENT_BUS.addListener(CozyProtection::entityTick);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, CozyProtection::restoreInventory);
         NeoForge.EVENT_BUS.addListener((ServerStoppedEvent event) -> LOADED.clear());
     }
 
@@ -150,6 +154,20 @@ public final class CozyProtection {
         return player.isAlive() && !player.isSpectator() && stack.is(CHARM.get())
                 ? stack
                 : ItemStack.EMPTY;
+    }
+
+    /**
+     * Death checks must still work after health reaches zero. No session-only snapshot is needed.
+     */
+    public static boolean keepsInventory(Player player) {
+        return player instanceof ServerPlayer
+                && !player.isSpectator()
+                && player.getOffhandItem().is(CHARM.get());
+    }
+
+    private static void restoreInventory(PlayerEvent.Clone event) {
+        if (event.isWasDeath() && keepsInventory(event.getOriginal()))
+            event.getEntity().getInventory().replaceWith(event.getOriginal().getInventory());
     }
 
     static boolean protectedPlayer(Entity entity) {

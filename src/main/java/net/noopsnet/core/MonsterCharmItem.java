@@ -73,6 +73,7 @@ public final class MonsterCharmItem extends Item {
     public void appendHoverText(
             ItemStack stack, TooltipContext context, List<Component> lines, TooltipFlag flag) {
         lines.add(Component.literal("Equip in your offhand for a cozy adventure."));
+        lines.add(Component.literal("Keep your inventory, armor and charm on death."));
         lines.add(
                 Component.literal(
                         "Hostile attack protection: " + (preventAttacks(stack) ? "on" : "off")));

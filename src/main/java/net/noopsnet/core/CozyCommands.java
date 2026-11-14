@@ -149,6 +149,8 @@ public final class CozyCommands {
                                 + MonsterCharmItem.removeMonsters(charm)
                                 + " • Preserve named/persistent: "
                                 + MonsterCharmItem.preservePersistent(charm)));
+        player.sendSystemMessage(
+                Component.literal("Keep your inventory, armor and charm on death while equipped."));
         controls(
                 player,
                 "monstercharm",
